@@ -1,0 +1,133 @@
+:root {
+    /* Fallbacks */
+    --primary: #1a73e8; --primary-hover: #1557b0; --surface: #ffffff;
+    --background: #f8f9fa; --text-main: #202124; --text-muted: #5f6368;
+    --border: #dadce0; --danger: #ea4335; --tab-inactive: #e8eaed;
+    --print-btn: #34a853; --print-btn-hover: #2b8c45;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--background); color: var(--text-main);
+    padding: 20px; margin: 0; transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container { max-width: 900px; margin: 0 auto; }
+
+.top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+h2 { margin: 0; color: var(--text-main); }
+.global-controls { display: flex; gap: 10px; }
+select, button {
+    padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border); font-size: 14px;
+    background: var(--surface); color: var(--text-main); cursor: pointer;
+}
+.btn-settings.active { background: var(--primary); color: white; }
+
+.btn-print { background: var(--print-btn); color: white; border: none; font-weight: bold; }
+.btn-print:hover { background: var(--print-btn-hover); }
+
+/* Settings Panel & Theme UI */
+#settings-panel {
+    background: var(--surface); padding: 20px; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px;
+    border: 2px dashed var(--primary);
+}
+.settings-header { color: var(--primary); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.theme-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+
+.theme-item { 
+    display: flex; align-items: center; justify-content: space-between; 
+    background: var(--background); padding: 8px 15px; border-radius: 4px; border: 1px solid var(--border);
+}
+.theme-item-controls { display: flex; gap: 10px; }
+
+.header-panel {
+    background: var(--surface); padding: 20px; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 20px;
+}
+.input-group { display: flex; flex-direction: column; flex: 1; min-width: 150px; }
+label { font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+input[type="number"], input[type="text"] {
+    padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 16px;
+    background: var(--surface); color: var(--text-main);
+}
+input[type="color"] { width: 100%; height: 40px; border: none; cursor: pointer; padding: 0; border-radius: 4px; background: transparent; }
+
+.tabs { display: flex; gap: 5px; margin-bottom: -1px; overflow-x: auto; }
+.tab-btn {
+    padding: 12px 20px; background: var(--tab-inactive); border: 1px solid var(--border);
+    border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 600; color: var(--text-muted);
+}
+.tab-btn.active { background: var(--surface); color: var(--primary); border-bottom: 2px solid var(--surface); }
+.tab-add { background: transparent; color: var(--primary); border: 1px dashed var(--border); }
+
+.kit-board {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 0 8px 8px 8px; padding: 25px;
+}
+.category-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+    padding-bottom: 15px; border-bottom: 2px solid var(--primary);
+}
+.category-header input[type="text"] { font-size: 20px; font-weight: bold; color: var(--primary); width: 60%; }
+.category-controls { display: flex; align-items: center; gap: 15px; }
+
+.item-grid-header, .item-row {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr; gap: 10px;
+    align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); text-align: center;
+}
+.item-grid-header { font-weight: bold; color: var(--text-muted); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 10px; }
+.item-grid-header > div:first-child, .item-row > div:first-child { text-align: left; }
+
+.item-name { font-weight: 500; }
+.base-input, .on-hand-input { width: 100%; box-sizing: border-box; text-align: center; }
+.calc-total { font-size: 18px; font-weight: bold; color: var(--text-main); }
+.to-order { font-size: 18px; font-weight: bold; color: var(--danger); }
+
+.btn-edit { background: none; border: none; color: var(--primary); cursor: pointer; font-size: 20px; padding: 0 5px; }
+.btn-delete { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 20px; padding: 0 5px; }
+.btn-edit:hover, .btn-delete:hover { opacity: 0.7; }
+
+.btn-add { background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; padding: 10px 20px; font-weight: bold; }
+.add-item-form { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; }
+.add-item-form input[type="text"] { flex: 1; }
+
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;
+}
+.modal-content { background: var(--surface); padding: 30px; border-radius: 8px; width: 400px; max-width: 90%; color: var(--text-main); }
+.modal-actions { display: flex; justify-content: space-between; margin-top: 25px; }
+.print-checkbox-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 16px; }
+.color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+/* --- Print Logic --- */
+.print-only { display: none; }
+
+@media print {
+    /* Remove background colors and padding from the body */
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Completely delete the main app and modals from the print flow */
+    .app-container, .modal-overlay {
+        display: none !important;
+    }
+
+    /* Show only the print area */
+    .print-only {
+        display: block !important;
+        position: relative;
+        color: black; 
+        background: white; 
+        font-family: sans-serif;
+    }
+
+    /* Table styling */
+    .print-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .print-table th, .print-table td { border: 1px solid #000; padding: 8px; text-align: left; }
+    .print-table th { background-color: #eee; }
+    h2, h3 { color: black; margin-top: 0; }
+}
